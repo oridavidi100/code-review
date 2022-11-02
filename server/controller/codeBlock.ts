@@ -10,7 +10,7 @@ exports.findAllCodeBlocks = async (
   next: NextFunction
 ) => {
   try {
-    const codeBlock = await CodeBlock.find();
+    const codeBlock = await CodeBlock.find().select({ title: 1, name: 1 });
 
     res.send(codeBlock);
   } catch {}
