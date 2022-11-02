@@ -8,6 +8,8 @@ import mongoose from 'mongoose';
 
 import Router from './routes/api';
 
+import errorHandlerMiddleware from './middleware/errorHandler';
+
 const { MONGO_URL } = config;
 const app = express();
 
@@ -26,6 +28,8 @@ if (MONGO_URL) {
 app.use(express.json());
 
 app.use('/api', Router);
+
+app.use(errorHandlerMiddleware);
 
 app.listen(port, () => {});
 console.log(`app listen at port ${port}`);
