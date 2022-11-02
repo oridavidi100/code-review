@@ -26,7 +26,17 @@ function HomePageForMentors() {
       <div>
         {codeBlocks &&
           codeBlocks.map((block: Data.Codeblock) => {
-            return <p key={block._id}> {block.title}</p>;
+            return (
+              <p
+                key={block._id}
+                onClick={() => {
+                  navigate(`/${block.title}/${block._id}`);
+                }}
+              >
+                {' '}
+                {block.title}
+              </p>
+            );
           })}
       </div>
     </div>
