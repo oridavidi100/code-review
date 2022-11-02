@@ -1,7 +1,16 @@
-// import { Data } from '../@types/types';
+import { Data } from '../@types/types';
 
-const rootreducer = (state: any, action: any) => {
+const initialState: Data.InitialState = {
+  user: {
+    userName: '',
+    isAdmin: false,
+  },
+};
+
+const rootreducer = (state = initialState, action: Data.Action) => {
   switch (action.type) {
+    case 'SET_USER':
+      return { ...state, user: action.payload };
     default:
       return state;
   }
