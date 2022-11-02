@@ -6,6 +6,8 @@ import config from './config';
 
 import mongoose from 'mongoose';
 
+import Router from './routes/api';
+
 const { MONGO_URL } = config;
 const app = express();
 
@@ -21,10 +23,9 @@ if (MONGO_URL) {
       console.log('error connecting to MongoDB:', error.message);
     });
 }
+app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.send('hello');
-});
+app.use('/api', Router);
 
 app.listen(port, () => {});
 console.log(`app listen at port ${port}`);
