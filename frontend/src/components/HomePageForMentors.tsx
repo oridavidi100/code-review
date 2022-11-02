@@ -9,15 +9,28 @@ import { useNavigate } from 'react-router-dom';
 function HomePageForMentors() {
   const user = useSelector((state: Data.InitialState) => state.user);
 
+  const codeBlocks = useSelector(
+    (state: Data.InitialState) => state.codeBlocks
+  );
+
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(user.admin);
     if (user.admin != true) {
       navigate('/');
     }
   });
-  return <div>HomePageForMentors</div>;
+
+  return (
+    <div>
+      <div>
+        {codeBlocks &&
+          codeBlocks.map((block: Data.Codeblock) => {
+            return <p key={block._id}> {block.title}</p>;
+          })}
+      </div>
+    </div>
+  );
 }
 
 export default HomePageForMentors;
