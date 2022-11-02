@@ -4,10 +4,14 @@ import axios from 'axios';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { useNavigate } from 'react-router-dom';
+
 import { setUser } from '../reducer/action';
 import { Data } from '../@types/types';
 
 function Login() {
+  const navigate = useNavigate();
+
   const userName = useRef<string | any>('');
   const password = useRef<string | any>('');
 
@@ -25,6 +29,7 @@ function Login() {
       if (response.status === 200) {
         dispatch(setUser(response.data));
         console.log(user);
+        if (response.data.admin === true) navigate('/LobbyPage');
       }
     } catch (err: any) {
       console.log(err.response.data.error);
@@ -41,7 +46,7 @@ function Login() {
           className="loginInput"
           name="userName"
           type="text"
-          placeholder="please enter userName\"
+          placeholder="please enter userName"
           ref={userName}
         />
         <label htmlFor="password">Password</label>

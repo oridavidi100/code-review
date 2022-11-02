@@ -9,6 +9,6 @@ export declare namespace Data {
   }
   interface User {
     userName: string;
-    isAdmin: boolean;
+    admin: boolean;
   }
 }

@@ -3,7 +3,7 @@ import { Data } from '../@types/types';
 const initialState: Data.InitialState = {
   user: {
     userName: '',
-    isAdmin: false,
+    admin: false,
   },
 };
 
