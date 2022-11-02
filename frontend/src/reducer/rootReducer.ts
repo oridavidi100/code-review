@@ -5,12 +5,16 @@ const initialState: Data.InitialState = {
     userName: '',
     admin: false,
   },
+  codeBlocks: [],
+  baseUrl: 'http://localhost:5000',
 };
 
 const rootreducer = (state = initialState, action: Data.Action) => {
   switch (action.type) {
     case 'SET_USER':
       return { ...state, user: action.payload };
+    case 'SET_CODE_BLOCKS':
+      return { ...state, codeBlocks: action.payload };
     default:
       return state;
   }
