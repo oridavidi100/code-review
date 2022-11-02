@@ -27,4 +27,4 @@ app.get('/', (req, res) => {
 });
 
 app.listen(port, () => {});
-console.log(`app listen at port ${MONGO_URL}`);
+console.log(`app listen at port ${port}`);
