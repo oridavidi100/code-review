@@ -15,3 +15,20 @@ exports.findAllCodeBlocks = async (
     res.send(codeBlock);
   } catch {}
 };
+
+exports.findOneCodeBlock = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { id } = req.params;
+    const codeBlock = await CodeBlock.findById(id).select({
+      content: 1,
+      _id: 0,
+    });
+    res.send(codeBlock).status(200);
+  } catch (err) {
+    console.log(err);
+  }
+};
