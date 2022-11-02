@@ -28,7 +28,6 @@ function Login() {
       });
       if (response.status === 200) {
         dispatch(setUser(response.data));
-        console.log(user);
         if (response.data.admin === true) navigate('/LobbyPage');
       }
     } catch (err: any) {
