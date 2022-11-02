@@ -21,7 +21,6 @@ function CodeBlockPage({ block }: { block: any }) {
     axios
       .get(`${baseUrl}/api/findOneCodeBlock/${block._id}`)
       .then(res => {
-        // setContent(res.data.content);
         codeBlock.current.value = res.data.content;
       })
       .catch(err => {
@@ -32,9 +31,7 @@ function CodeBlockPage({ block }: { block: any }) {
   return (
     <div>
       <p>{mentor}</p>
-
       <input type="text" ref={codeBlock} readOnly={user.admin} />
-      {/* {content} */}
     </div>
   );
 }
