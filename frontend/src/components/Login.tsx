@@ -1,11 +1,36 @@
 import React, { useRef, useEffect } from 'react';
+
+import axios from 'axios';
+
+import { useDispatch, useSelector } from 'react-redux';
+
+import { setUser } from '../reducer/action';
+import { Data } from '../@types/types';
+
 function Login() {
-  const fullName = useRef<string | any>('');
+  const userName = useRef<string | any>('');
   const password = useRef<string | any>('');
+
+  const dispatch = useDispatch();
+
+  const user = useSelector((state: Data.InitialState) => state.user);
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(fullName.current.value, password.current.value);
+    try {
+      e.preventDefault();
+      const response = await axios.put('http://localhost:5000/api/login', {
+        userName: userName.current.value,
+        password: password.current.value,
+      });
+      if (response.status === 200) {
+        dispatch(setUser(response.data));
+        console.log(user);
+      }
+    } catch (err: any) {
+      console.log(err.response.data.error);
+    }
   };
+
   return (
     <div className="LoginPage">
       <h1 className="loginHeader">Sign in</h1>
@@ -14,10 +39,10 @@ function Login() {
         <input
           required={true}
           className="loginInput"
-          name="fullName"
+          name="userName"
           type="text"
-          placeholder="please enter full name"
-          ref={fullName}
+          placeholder="please enter userName\"
+          ref={userName}
         />
         <label htmlFor="password">Password</label>
         <input
