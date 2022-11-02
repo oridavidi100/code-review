@@ -11,7 +11,10 @@ import Router from './routes/api';
 import errorHandlerMiddleware from './middleware/errorHandler';
 
 const { MONGO_URL } = config;
+
 const app = express();
+
+app.use(cors());
 
 const port = 5000;
 
@@ -25,6 +28,7 @@ if (MONGO_URL) {
       console.log('error connecting to MongoDB:', error.message);
     });
 }
+
 app.use(express.json());
 
 app.use('/api', Router);
