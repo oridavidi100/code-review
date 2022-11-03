@@ -19,12 +19,14 @@ import hljs from 'highlight.js';
 function CodeBlockPage({ block }: { block: Data.Codeblock }) {
   const socketRef = useRef<Socket>();
 
-  const codeBlock = useRef<string | any>('3');
+  const codeBlock = useRef<string | any>('');
   const titleRef = useRef<string | any>('');
   const name = useRef<string | any>('');
 
   const [code, setCode] = useState<string>('');
   const [mentor, setMentor] = useState<string>('');
+  const [solutionBtnClass, setSolutionBtnClass] =
+    useState<string>('notShowBtnSolutin');
 
   const user = useSelector((state: Data.InitialState) => state.user);
   const baseUrl = useSelector((state: Data.InitialState) => state.baseUrl);
@@ -41,9 +43,16 @@ function CodeBlockPage({ block }: { block: Data.Codeblock }) {
     socketRef.current.on('updateTitleBack', ({ title }) => {
       titleRef.current.value = title;
     });
+
+    socketRef.current.on('correctAnswerBack', () => {
+      toast('nice solution', {
+        type: 'success',
+      });
+    });
     if (user.admin === true) {
       setMentor('you are in read only mode');
     }
+    // setSolutionBtnClass('showBtnSolutin');
     axios
       .get(`${baseUrl}/api/findOneCodeBlock/${block._id}`)
       .then(res => {
@@ -91,6 +100,9 @@ function CodeBlockPage({ block }: { block: Data.Codeblock }) {
     }
   };
 
+  const correctAnswer = () => {
+    socketRef.current!.emit('correctAnswer');
+  };
   return (
     <div className="codeBlockDiv">
       <p>{mentor}</p>
@@ -114,6 +126,9 @@ function CodeBlockPage({ block }: { block: Data.Codeblock }) {
         />
         <button>change</button>
       </form>
+      <button className={solutionBtnClass} onClick={() => correctAnswer()}>
+        solution
+      </button>
     </div>
   );
 }

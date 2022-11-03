@@ -11,6 +11,9 @@ export const onConnection = (socket: SocketType) => {
     await CodeBlock.findOneAndUpdate({ _id: id }, { title: title });
     socket.broadcast.emit('updateTitleBack', { title });
   });
+  socket.on('correctAnswer', async () => {
+    socket.broadcast.emit('correctAnswerBack');
+  });
 
   socket.on('disconnect', () => {});
 };

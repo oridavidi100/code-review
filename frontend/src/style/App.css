@@ -47,6 +47,10 @@ body {
 /* .////////HOME PAGE /////// */
 
 /* //////CODE BLOCK PAGE //////// */
+.notShowBtnSolutin {
+  display: none;
+}
+
 .javascript {
   width: 750px;
   height: 450px;

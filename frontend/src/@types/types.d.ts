@@ -25,11 +25,13 @@ export declare namespace Data {
 export interface ServerToClientEvents {
   updateBack: ({ content }: updateBack) => void;
   updateTitleBack: ({ title }: UpdateTitleBack) => void;
+  correctAnswerBack: () => void;
 }
 
 export interface ClientToServerEvents {
   update: ({ content, id }: update) => void;
   updateTitle: ({ title, id }: UpdateTitle) => void;
+  correctAnswer: () => void;
 }
 
 export interface UpdateTitleBack {

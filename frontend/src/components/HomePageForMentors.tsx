@@ -23,7 +23,6 @@ function HomePageForMentors() {
       navigate('/');
     }
   });
-  const itemClicked = async () => {};
 
   return (
     <div>
