@@ -8,7 +8,6 @@ export const onConnection = (socket: SocketType) => {
     socket.broadcast.emit('updateBack', { content });
   });
   socket.on('updateTitle', async ({ title, id }) => {
-    console.log(title, id);
     await CodeBlock.findOneAndUpdate({ _id: id }, { title: title });
     socket.broadcast.emit('updateTitleBack', { title });
   });
