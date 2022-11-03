@@ -38,11 +38,39 @@ body {
 
 /* /////////LOGIN /////////// */
 
+/* /////////HOME PAGE ./////// */
+
 .codeBlockItem {
   cursor: pointer;
 }
 
+/* .////////HOME PAGE /////// */
+
+/* //////CODE BLOCK PAGE //////// */
 .javascript {
-  width: 400px;
-  height: 200px;
+  width: 750px;
+  height: 450px;
 }
+
+.codeBlockDiv {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: space-around;
+  align-items: flex-start;
+}
+
+.changeName {
+  background: antiquewhite;
+  width: 374px;
+  display: flex;
+  flex-direction: row;
+  height: 59px;
+  align-items: center;
+}
+
+.changeNameInput {
+  margin-left: 39px;
+}
+
+/* //////CODE BLOCK PAGE ///// */

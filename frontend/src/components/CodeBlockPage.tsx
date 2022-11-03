@@ -92,7 +92,7 @@ function CodeBlockPage({ block }: { block: Data.Codeblock }) {
   };
 
   return (
-    <div>
+    <div className="codeBlockDiv">
       <p>{mentor}</p>
       <input type="text" ref={titleRef} onChange={e => updateTitle(e)} />
       <textarea
@@ -103,10 +103,10 @@ function CodeBlockPage({ block }: { block: Data.Codeblock }) {
       <pre>
         <code className="javascript">{codeBlock.current.value}</code>
       </pre>
-      <form onSubmit={e => handleSubmit(e)}>
+      <form onSubmit={e => handleSubmit(e)} className="changeName">
         <label htmlFor="changeName">change name of block code</label>
         <input
-          className="loginInput"
+          className="changeNameInput"
           name="changeName"
           type="changeName"
           placeholder="please enter new name"
