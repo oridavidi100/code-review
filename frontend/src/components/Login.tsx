@@ -18,6 +18,8 @@ function Login() {
   const userName = useRef<string | any>('');
   const password = useRef<string | any>('');
 
+  const baseUrl = useSelector((state: Data.InitialState) => state.baseUrl);
+
   const dispatch = useDispatch();
 
   const user = useSelector((state: Data.InitialState) => state.user);
@@ -25,7 +27,7 @@ function Login() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
-      const response = await axios.put('http://localhost:5000/api/login', {
+      const response = await axios.put(`${baseUrl}/api/login`, {
         userName: userName.current.value,
         password: password.current.value,
       });

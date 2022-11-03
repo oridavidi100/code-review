@@ -37,3 +37,12 @@ body {
 }
 
 /* /////////LOGIN /////////// */
+
+.codeBlockItem {
+  cursor: pointer;
+}
+
+.javascript {
+  width: 400px;
+  height: 200px;
+}

@@ -32,3 +32,17 @@ exports.findOneCodeBlock = async (
     console.log(err);
   }
 };
+
+exports.changeCodeBlockName = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { id, newName } = req.body;
+    await CodeBlock.findOneAndUpdate({ _id: id }, { name: newName });
+    res.send('name of code block changed');
+  } catch (err) {
+    console.log(err);
+  }
+};

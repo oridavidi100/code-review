@@ -12,12 +12,18 @@ import {
 
 import { io, Socket } from 'socket.io-client';
 
+import { toast } from 'react-toastify';
+
+import hljs from 'highlight.js';
+
 function CodeBlockPage({ block }: { block: Data.Codeblock }) {
   const socketRef = useRef<Socket>();
 
-  const codeBlock = useRef<string | any>('');
+  const codeBlock = useRef<string | any>('3');
   const titleRef = useRef<string | any>('');
+  const name = useRef<string | any>('');
 
+  const [code, setCode] = useState<string>('');
   const [mentor, setMentor] = useState<string>('');
 
   const user = useSelector((state: Data.InitialState) => state.user);
@@ -25,10 +31,11 @@ function CodeBlockPage({ block }: { block: Data.Codeblock }) {
 
   useEffect(() => {
     titleRef.current.value = block.title;
-
+    setCode('!');
     socketRef.current = io(`${baseUrl}`);
     socketRef.current.on('updateBack', ({ content }) => {
-      codeBlock.current.value = content;
+      codeBlock.current!.value = content;
+      setCode(content);
     });
 
     socketRef.current.on('updateTitleBack', ({ title }) => {
@@ -37,7 +44,6 @@ function CodeBlockPage({ block }: { block: Data.Codeblock }) {
     if (user.admin === true) {
       setMentor('you are in read only mode');
     }
-
     axios
       .get(`${baseUrl}/api/findOneCodeBlock/${block._id}`)
       .then(res => {
@@ -46,7 +52,13 @@ function CodeBlockPage({ block }: { block: Data.Codeblock }) {
       .catch(err => {
         console.log(err);
       });
+    // hljs.highlightAll();
+    console.log(codeBlock.current.value);
   }, []);
+
+  useEffect(() => {
+    hljs.highlightAll();
+  }, [code]);
 
   const updateCode = async (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     e.preventDefault();
@@ -64,6 +76,21 @@ function CodeBlockPage({ block }: { block: Data.Codeblock }) {
     });
   };
 
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      await axios.put(`${baseUrl}/api/changeCodeBlockName`, {
+        newName: name.current.value,
+        id: block._id,
+      });
+      toast('Name changed', {
+        type: 'success',
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div>
       <p>{mentor}</p>
@@ -73,6 +100,20 @@ function CodeBlockPage({ block }: { block: Data.Codeblock }) {
         readOnly={user.admin}
         onChange={e => updateCode(e)}
       />
+      <pre>
+        <code className="javascript">{codeBlock.current.value}</code>
+      </pre>
+      <form onSubmit={e => handleSubmit(e)}>
+        <label htmlFor="changeName">change name of block code</label>
+        <input
+          className="loginInput"
+          name="changeName"
+          type="changeName"
+          placeholder="please enter new name"
+          ref={name}
+        />
+        <button>change</button>
+      </form>
     </div>
   );
 }
