@@ -30,7 +30,7 @@ function HomePageForMentors() {
               <p
                 key={block._id}
                 onClick={() => {
-                  navigate(`/${block.title}/${block._id}`);
+                  navigate(`/${block.title.replaceAll(' ', '-')}/${block._id}`);
                 }}
               >
                 {' '}
