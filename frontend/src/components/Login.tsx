@@ -9,6 +9,9 @@ import { useNavigate } from 'react-router-dom';
 import { setUser } from '../reducer/action';
 import { Data } from '../@types/types';
 
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function Login() {
   const navigate = useNavigate();
 
@@ -28,10 +31,17 @@ function Login() {
       });
       if (response.status === 200) {
         dispatch(setUser(response.data));
-        if (response.data.admin === true) navigate('/LobbyPage');
+        if (response.data.admin === true) {
+          navigate('/LobbyPage');
+          toast('Sign in successfully', {
+            type: 'success',
+          });
+        }
       }
     } catch (err: any) {
-      console.log(err.response.data.error);
+      toast(err.response.data.error, {
+        type: 'error',
+      });
     }
   };
 
