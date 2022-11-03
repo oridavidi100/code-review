@@ -19,3 +19,21 @@ export declare namespace Data {
     title: string;
   }
 }
+
+///socket///
+
+export interface ServerToClientEvents {
+  updateBack: ({ content }: updateBack) => void;
+}
+
+export interface ClientToServerEvents {
+  update: ({ content, id }: update) => void;
+}
+
+export interface updateBack {
+  content: string;
+}
+export interface update {
+  content: string;
+  id: string;
+}
