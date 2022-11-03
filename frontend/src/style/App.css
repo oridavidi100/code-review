@@ -1,39 +1,35 @@
-.App {
-  text-align: center;
+* {
+  font-family: 'Oswald', sans-serif;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  background-image: url('https://www.incimages.com/uploaded_files/image/1920x1080/getty_976323038_2000133320009280101_373073.jpg');
+  background-size: cover;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-float infinite 3s ease-in-out;
-  }
-}
-
-.App-header {
-  min-height: 100vh;
+.LoginPage {
+  background-color: antiquewhite;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  border: 1px solid black;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 4em 7em 4em 7em;
+}
+.loginForm {
+  display: flex;
+  margin-bottom: 35%;
+  flex-direction: column;
+}
+.loginForm button {
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.App-link {
-  color: rgb(112, 76, 182);
+.loginInput {
+  margin-bottom: 1rem;
 }
-
-@keyframes App-logo-float {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(10px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
+.loginHeader {
 }
