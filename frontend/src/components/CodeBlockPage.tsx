@@ -12,10 +12,11 @@ import {
 
 import { io, Socket } from 'socket.io-client';
 
-function CodeBlockPage({ block }: { block: any }) {
+function CodeBlockPage({ block }: { block: Data.Codeblock }) {
   const socketRef = useRef<Socket>();
 
   const codeBlock = useRef<string | any>('');
+  const titleRef = useRef<string | any>('');
 
   const [mentor, setMentor] = useState<string>('');
 
@@ -23,15 +24,20 @@ function CodeBlockPage({ block }: { block: any }) {
   const baseUrl = useSelector((state: Data.InitialState) => state.baseUrl);
 
   useEffect(() => {
+    titleRef.current.value = block.title;
+
     socketRef.current = io(`${baseUrl}`);
     socketRef.current.on('updateBack', ({ content }) => {
-      console.log('now');
       codeBlock.current.value = content;
     });
 
+    socketRef.current.on('updateTitleBack', ({ title }) => {
+      titleRef.current.value = title;
+    });
     if (user.admin === true) {
       setMentor('you are in read only mode');
     }
+
     axios
       .get(`${baseUrl}/api/findOneCodeBlock/${block._id}`)
       .then(res => {
@@ -42,7 +48,7 @@ function CodeBlockPage({ block }: { block: any }) {
       });
   }, []);
 
-  const updateCode = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const updateCode = async (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     e.preventDefault();
     socketRef.current!.emit('update', {
       id: block._id,
@@ -50,11 +56,19 @@ function CodeBlockPage({ block }: { block: any }) {
     });
   };
 
+  const updateTitle = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    socketRef.current!.emit('updateTitle', {
+      id: block._id,
+      title: titleRef.current.value,
+    });
+  };
+
   return (
     <div>
       <p>{mentor}</p>
-      <input
-        type="text"
+      <input type="text" ref={titleRef} onChange={e => updateTitle(e)} />
+      <textarea
         ref={codeBlock}
         readOnly={user.admin}
         onChange={e => updateCode(e)}
