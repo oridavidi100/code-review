@@ -3,6 +3,8 @@ import axios from 'axios';
 
 import '../style/App.css';
 
+import { ToastContainer } from 'react-toastify';
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -35,6 +37,7 @@ function App() {
 
   return (
     <div className="App">
+      <ToastContainer />
       <Router>
         <div className="">
           <Routes>

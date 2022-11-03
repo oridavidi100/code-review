@@ -5,6 +5,8 @@ body {
   background-image: url('https://www.incimages.com/uploaded_files/image/1920x1080/getty_976323038_2000133320009280101_373073.jpg');
   background-size: cover;
 }
+
+/* ////////////LOGIN ////////// */
 .LoginPage {
   background-color: antiquewhite;
   position: absolute;
@@ -33,3 +35,5 @@ body {
 }
 .loginHeader {
 }
+
+/* /////////LOGIN /////////// */
