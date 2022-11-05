@@ -35,20 +35,16 @@ function HomePageForMentors() {
               <div
                 className="codeBlockDivLobby"
                 onClick={() => {
-                  navigator.clipboard.writeText(
-                    `${baseUrl}/${block.title.replaceAll(' ', '-')}/${
-                      block._id
-                    }`
-                  );
                   const url = window.location.href.split('/');
                   url.pop();
                   const newUrl = url.join('/');
+                  navigator.clipboard.writeText(
+                    `${newUrl}/${block.title.replaceAll(' ', '-')}/${block._id}`
+                  );
                   toast('The code block url copied to your clipboard !', {
                     type: 'success',
                   });
-                  navigate(
-                    `${newUrl}/${block.title.replaceAll(' ', '-')}/${block._id}`
-                  );
+                  navigate(`/${block.title.replaceAll(' ', '-')}/${block._id}`);
                 }}
               >
                 <p className="codeBlockItem" key={block._id}>
