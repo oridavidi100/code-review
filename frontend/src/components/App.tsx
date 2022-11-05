@@ -14,6 +14,7 @@ import CodeBlockPage from './CodeBlockPage';
 
 import { Data } from '../@types/types';
 import { setCodeBlockes } from '../reducer/action';
+import NotFound from './NotFound';
 
 function App() {
   const baseUrl = useSelector((state: Data.InitialState) => state.baseUrl);
@@ -52,6 +53,7 @@ function App() {
               })}
             <Route path="/" element={<Login />} />
             <Route path="/LobbyPage" element={<HomePageForMentors />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
       </Router>
