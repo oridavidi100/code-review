@@ -43,13 +43,11 @@ app.use(express_1.default.json());
 app.use('/api', api_1.default);
 app.use(errorHandler_1.default);
 app.use(
-  express_1.default.static(
-    path_1.default.resolve(__dirname, '../../frontend/build')
-  )
+  express_1.default.static(path_1.default.resolve(__dirname, '../../client'))
 );
 app.get('*', function (request, response) {
   response.sendFile(
-    path_1.default.resolve(__dirname, '../../frontend/build', 'index.html')
+    path_1.default.resolve(__dirname, '../../client', 'index.html')
   );
 });
 exports.server = httpServer.listen(process.env.PORT || 5000, () => {
