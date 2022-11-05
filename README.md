@@ -46,8 +46,8 @@
 ## Code block for stuednt
 
 - _Code block that change at real time_
-- _student can change the title of the code block_
-- _student can change the name of the code block_
+- _Student can change the title of the code block_
+- _Student can change the name of the code block_
 
 ## Code block for user
 
