@@ -15,9 +15,12 @@ import { io, Socket } from 'socket.io-client';
 import { toast } from 'react-toastify';
 
 import hljs from 'highlight.js';
+import { useNavigate } from 'react-router-dom';
 
 function CodeBlockPage({ block }: { block: Data.Codeblock }) {
   const socketRef = useRef<Socket>();
+
+  const navigate = useNavigate();
 
   const codeBlock = useRef<string | any>('');
   const titleRef = useRef<string | any>('');
@@ -35,6 +38,9 @@ function CodeBlockPage({ block }: { block: Data.Codeblock }) {
     titleRef.current.value = block.title;
     setCode('!');
     socketRef.current = io(`${baseUrl}`);
+    socketRef.current!.emit('join', {
+      room: block._id,
+    });
     socketRef.current.on('updateBack', ({ content }) => {
       codeBlock.current!.value = content;
       setCode(content);
@@ -51,8 +57,8 @@ function CodeBlockPage({ block }: { block: Data.Codeblock }) {
     });
     if (user.admin === true) {
       setMentor('You are in read only mode');
+      setSolutionBtnClass('showBtnSolutin');
     }
-    // setSolutionBtnClass('showBtnSolutin');
     axios
       .get(`${baseUrl}/api/findOneCodeBlock/${block._id}`)
       .then(res => {
@@ -63,6 +69,10 @@ function CodeBlockPage({ block }: { block: Data.Codeblock }) {
       });
     // hljs.highlightAll();
     console.log(codeBlock.current.value);
+    return () => {
+      // socketRef.current?.emit('disconnect');
+      socketRef.current?.close();
+    };
   }, []);
 
   useEffect(() => {
@@ -100,9 +110,14 @@ function CodeBlockPage({ block }: { block: Data.Codeblock }) {
     }
   };
 
-  const correctAnswer = () => {
-    socketRef.current!.emit('correctAnswer');
+  const correctAnswer = async () => {
+    socketRef.current?.emit('correctAnswer');
   };
+
+  const BacktoLobby = async () => {
+    navigate('/LobbyPage');
+  };
+
   return (
     <div className="codeBlockDiv">
       <p>{mentor}</p>
@@ -128,6 +143,13 @@ function CodeBlockPage({ block }: { block: Data.Codeblock }) {
       </form>
       <button className={solutionBtnClass} onClick={() => correctAnswer()}>
         solution
+      </button>
+      <button
+        onClick={() => {
+          BacktoLobby();
+        }}
+      >
+        Back to Lobby
       </button>
     </div>
   );

@@ -7,6 +7,7 @@ export interface ServerToClientEvents {
 }
 
 export interface ClientToServerEvents {
+  join: ({ room }: { room: string }) => void;
   update: ({ content, id }: update) => void;
   updateTitle: ({ title, id }: UpdateTitle) => void;
   correctAnswer: () => void;
