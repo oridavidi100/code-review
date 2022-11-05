@@ -40,10 +40,15 @@ function HomePageForMentors() {
                       block._id
                     }`
                   );
+                  const url = window.location.href.split('/');
+                  url.pop();
+                  const newUrl = url.join('/');
                   toast('The code block url copied to your clipboard !', {
                     type: 'success',
                   });
-                  navigate(`/${block.title.replaceAll(' ', '-')}/${block._id}`);
+                  navigate(
+                    `${newUrl}/${block.title.replaceAll(' ', '-')}/${block._id}`
+                  );
                 }}
               >
                 <p className="codeBlockItem" key={block._id}>

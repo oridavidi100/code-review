@@ -6,7 +6,7 @@ const initialState: Data.InitialState = {
     admin: false,
   },
   codeBlocks: [],
-  baseUrl: 'http://localhost:5000',
+  baseUrl: '',
 };
 
 const rootreducer = (state = initialState, action: Data.Action) => {
