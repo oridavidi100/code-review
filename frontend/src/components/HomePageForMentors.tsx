@@ -26,7 +26,7 @@ function HomePageForMentors() {
 
   return (
     <div className="homePage">
-      <p>welcome {user.userName}</p>
+      <p>Welcome {user.userName}</p>
       <header>Choose code block</header>
       <div className="codeBlocks">
         {codeBlocks &&

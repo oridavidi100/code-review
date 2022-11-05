@@ -52,7 +52,7 @@ function CodeBlockPage({ block }: { block: Data.Codeblock }) {
     });
 
     socketRef.current.on('correctAnswerBack', () => {
-      toast('nice solution', {
+      toast('Nice solution !', {
         type: 'success',
       });
     });
@@ -136,13 +136,13 @@ function CodeBlockPage({ block }: { block: Data.Codeblock }) {
           className="changeNameInput"
           name="changeName"
           type="changeName"
-          placeholder="please enter new name"
+          placeholder="Please enter new name"
           ref={name}
         />
-        <button>change</button>
+        <button>Change</button>
       </form>
       <button className={solutionBtnClass} onClick={() => correctAnswer()}>
-        solution
+        Solution
       </button>
       <button
         onClick={() => {

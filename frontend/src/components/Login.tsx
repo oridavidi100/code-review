@@ -52,13 +52,13 @@ function Login() {
       <h1 className="loginHeader">Sign in</h1>
 
       <form className="loginForm" onSubmit={e => handleSubmit(e)}>
-        <label htmlFor="fullName">Full name</label>
+        <label htmlFor="username">username</label>
         <input
           required={true}
           className="loginInput"
-          name="userName"
+          name="username"
           type="text"
-          placeholder="please enter userName"
+          placeholder="please enter username"
           ref={userName}
         />
         <label htmlFor="password">Password</label>
@@ -69,7 +69,7 @@ function Login() {
           placeholder="please enter password"
           ref={password}
         />
-        <button>sign in</button>
+        <button>Sign in</button>
       </form>
     </div>
   );
