@@ -50,7 +50,7 @@ function CodeBlockPage({ block }: { block: Data.Codeblock }) {
       });
     });
     if (user.admin === true) {
-      setMentor('you are in read only mode');
+      setMentor('You are in read only mode');
     }
     // setSolutionBtnClass('showBtnSolutin');
     axios
@@ -116,7 +116,7 @@ function CodeBlockPage({ block }: { block: Data.Codeblock }) {
         <code className="javascript">{codeBlock.current.value}</code>
       </pre>
       <form onSubmit={e => handleSubmit(e)} className="changeName">
-        <label htmlFor="changeName">change name of block code</label>
+        <label htmlFor="changeName">Change name of block code</label>
         <input
           className="changeNameInput"
           name="changeName"

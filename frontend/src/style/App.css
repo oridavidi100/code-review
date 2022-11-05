@@ -39,11 +39,59 @@ body {
 /* /////////LOGIN /////////// */
 
 /* /////////HOME PAGE ./////// */
+.homePage {
+  text-align: center;
+}
+.homePage p {
+  font-size: 350%;
+  font-weight: 100;
+}
+.homePage header {
+  font-size: 203%;
+}
 
 .codeBlockItem {
   cursor: pointer;
+  color: antiquewhite;
+}
+.codeBlockDivLobby {
+  display: flex;
+  width: 26%;
+  flex-direction: column;
+  margin-left: 1.235%;
+  border-color: grey;
+  border-radius: 2px;
+  border-style: inset;
+  text-align: center;
+}
+.codeBlockDivLobby P {
+  font-size: 150%;
+  background-color: black;
+  width: 30%;
 }
 
+.codeBlockDivLobby:hover {
+  border-color: antiquewhite;
+  border-radius: 2px;
+  border-style: inset;
+}
+.codeBlockDivLobby:hover p {
+  background-color: antiquewhite;
+  color: black;
+}
+
+.codeBlocks {
+  display: flex;
+  flex-direction: row;
+  margin-top: 6%;
+}
+
+.codeBlockImg {
+  width: 95%;
+  height: 67%;
+  margin-left: 3%;
+  margin-bottom: 1%;
+}
 /* .////////HOME PAGE /////// */
 
 /* //////CODE BLOCK PAGE //////// */

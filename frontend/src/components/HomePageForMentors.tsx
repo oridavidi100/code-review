@@ -25,32 +25,37 @@ function HomePageForMentors() {
   });
 
   return (
-    <div>
+    <div className="homePage">
+      <p>welcome {user.userName}</p>
       <header>Choose code block</header>
-      <div>
+      <div className="codeBlocks">
         {codeBlocks &&
           codeBlocks.map((block: Data.Codeblock) => {
             return (
-              // <div>
-              <p
-                className="codeBlockItem"
-                key={block._id}
+              <div
+                className="codeBlockDivLobby"
                 onClick={() => {
                   navigator.clipboard.writeText(
                     `${baseUrl}/${block.title.replaceAll(' ', '-')}/${
                       block._id
                     }`
                   );
-
                   toast('The code block url copied to your clipboard !', {
                     type: 'success',
                   });
                   navigate(`/${block.title.replaceAll(' ', '-')}/${block._id}`);
                 }}
               >
-                {' '}
-                {block.name}
-              </p>
+                <p className="codeBlockItem" key={block._id}>
+                  {' '}
+                  {block.name}
+                </p>
+                <img
+                  className="codeBlockImg"
+                  src="https://images.unsplash.com/photo-1537884944318-390069bb8665?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fGNvZGV8ZW58MHx8MHx8&w=1000&q=80"
+                  alt=""
+                />
+              </div>
             );
           })}
       </div>
