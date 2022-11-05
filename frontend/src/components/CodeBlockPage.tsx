@@ -30,6 +30,7 @@ function CodeBlockPage({ block }: { block: Data.Codeblock }) {
   const [mentor, setMentor] = useState<string>('');
   const [solutionBtnClass, setSolutionBtnClass] =
     useState<string>('notShowBtnSolutin');
+  const [TextArea, setTextArea] = useState<string>('showTextArea');
 
   const user = useSelector((state: Data.InitialState) => state.user);
   const baseUrl = useSelector((state: Data.InitialState) => state.baseUrl);
@@ -58,6 +59,7 @@ function CodeBlockPage({ block }: { block: Data.Codeblock }) {
     if (user.admin === true) {
       setMentor('You are in read only mode');
       setSolutionBtnClass('showBtnSolutin');
+      setTextArea('notShowTextArea');
     }
     axios
       .get(`${baseUrl}/api/findOneCodeBlock/${block._id}`)
@@ -67,10 +69,7 @@ function CodeBlockPage({ block }: { block: Data.Codeblock }) {
       .catch(err => {
         console.log(err);
       });
-    // hljs.highlightAll();
-    console.log(codeBlock.current.value);
     return () => {
-      // socketRef.current?.emit('disconnect');
       socketRef.current?.close();
     };
   }, []);
@@ -123,6 +122,7 @@ function CodeBlockPage({ block }: { block: Data.Codeblock }) {
       <p>{mentor}</p>
       <input type="text" ref={titleRef} onChange={e => updateTitle(e)} />
       <textarea
+        className={TextArea}
         ref={codeBlock}
         readOnly={user.admin}
         onChange={e => updateCode(e)}

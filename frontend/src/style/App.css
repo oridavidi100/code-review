@@ -95,6 +95,10 @@ body {
 /* .////////HOME PAGE /////// */
 
 /* //////CODE BLOCK PAGE //////// */
+
+.notShowTextArea {
+  display: none;
+}
 .notShowBtnSolutin {
   display: none;
 }
